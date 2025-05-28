@@ -66,5 +66,5 @@ jobs:
         with:
           app-name: 'app-step4-52'
           slot-name: 'Production'
-          package: .
+          package: release.zip
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F082D95DF2BB49D7A04260AD29F29BAF }}
