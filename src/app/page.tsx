@@ -22,7 +22,7 @@ export default function Home() {
   // 商品コード（JAN等）
   const [prdCode, setPrdCode] = useState("");
   // 商品ID（一意キー）
-  const [prdId, setPrdId] = useState("");
+//   const [prdId, setPrdId] = useState("");
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -55,15 +55,15 @@ export default function Home() {
       if (!data || !data.NAME) {
         setError("商品がマスタ未登録です");
         setProduct(null);
-        setPrdId(""); // IDもクリア
+//         setPrdId(""); // IDもクリア
       } else {
         setProduct(data);
-        setPrdId(data.PRD_ID); // IDをセット
+//         setPrdId(data.PRD_ID); // IDをセット
       }
     } catch (e) {
       setError("通信エラーが発生しました");
       setProduct(null);
-      setPrdId("");
+//       setPrdId("");
     } finally {
       setLoading(false);
     }
@@ -135,7 +135,7 @@ export default function Home() {
     setTotalAmount_INC_TAX(0);
     setProduct(null);
     setPrdCode("");
-    setPrdId("");
+//     setPrdId("");
     setError("");
     setShowPopup(false);
   }
