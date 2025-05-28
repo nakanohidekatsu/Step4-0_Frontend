@@ -34,6 +34,8 @@ jobs:
           mkdir deploy
           cp -r ./.next/standalone/. ./deploy
           cp -r ./.next/static/. ./deploy/.next/static
+          cp ./package.json ./deploy/
+          cp ./package-lock.json ./deploy/
 
       - name: Zip artifact for deployment
         run: zip release.zip ./deploy -r
@@ -66,5 +68,5 @@ jobs:
         with:
           app-name: 'app-step4-52'
           slot-name: 'Production'
-          package: release.zip
+          package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F082D95DF2BB49D7A04260AD29F29BAF }}
