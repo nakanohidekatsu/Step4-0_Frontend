@@ -55,15 +55,12 @@ export default function Home() {
       if (!data || !data.NAME) {
         setError("商品がマスタ未登録です");
         setProduct(null);
-//         setPrdId(""); // IDもクリア
       } else {
         setProduct(data);
-//         setPrdId(data.PRD_ID); // IDをセット
       }
-    } catch (e) {
+    } catch {
       setError("通信エラーが発生しました");
       setProduct(null);
-//       setPrdId("");
     } finally {
       setLoading(false);
     }
@@ -124,7 +121,7 @@ export default function Home() {
       }
 
       setShowPopup(true);
-    } catch (e) {
+    } catch {
       alert("購入処理に失敗しました");
     }
   }
@@ -135,7 +132,6 @@ export default function Home() {
     setTotalAmount_INC_TAX(0);
     setProduct(null);
     setPrdCode("");
-//     setPrdId("");
     setError("");
     setShowPopup(false);
   }
