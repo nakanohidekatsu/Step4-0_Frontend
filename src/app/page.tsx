@@ -51,6 +51,9 @@ export default function Home() {
       );
       if (!res.ok) throw new Error("Failed to fetch shouhin");
 
+      // nakano add
+      console.log(process.env.NEXT_PUBLIC_API_ENDPOINT + `/shouhin?CODE=${CODE}`);
+
       const data = await res.json();
       if (!data || !data.NAME) {
         setError("商品がマスタ未登録です");
