@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { Html5Qrcode } from "html5-qrcode";
 
 type Product = {
   PRD_ID: string;
@@ -19,7 +20,9 @@ type CartItem = {
 };
 
 export default function Home() {
-  // 商品コード（JAN等）
+  const [showScanner, setShowScanner] = useState(false);
+  const html5QrCodeRef = useRef<any>(null);
+    // 商品コード（JAN等）
   const [prdCode, setPrdCode] = useState("");
   // 商品ID（一意キー）
 //   const [prdId, setPrdId] = useState("");
@@ -31,11 +34,52 @@ export default function Home() {
   const [totalAmount_INC_TAX, setTotalAmount_INC_TAX] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
 
-  function handleScan() {
-    const dummyCode = prompt("商品コードを入力（デモ）");
-    if (dummyCode) {
-      setPrdCode(dummyCode);
-      fetchProductByCODE(dummyCode);
+  async function handleScan() {
+    setShowScanner(true);
+    setTimeout(() => startScanner(), 100); // 少し待ってから開始
+  }
+
+  async function startScanner() {
+    if (!window?.navigator?.mediaDevices) {
+      alert("カメラ機能が利用できません");
+      setShowScanner(false);
+      return;
+    }
+    const qrRegionId = "qr-reader";
+    if (!html5QrCodeRef.current) {
+      html5QrCodeRef.current = new Html5Qrcode(qrRegionId);
+    }
+    html5QrCodeRef.current.start(
+      { facingMode: "environment" }, // 背面カメラ
+      {
+        fps: 10, 
+        qrbox: { width: 300, height: 200 },
+      },
+      (decodedText: string) => {
+        // バーコード（JAN）値取得
+        setShowScanner(false);
+        html5QrCodeRef.current.stop().then(() => {
+          html5QrCodeRef.current.clear();
+        });
+        setPrdCode(decodedText);
+        fetchProductByCODE(decodedText);
+      },
+      (error: any) => {
+      // console.log("No QR code", error);
+      }
+    ).catch((err: any) => {
+      alert("カメラ起動に失敗しました: " + err);
+      setShowScanner(false);
+    });
+  }
+
+   // カメラキャンセル
+  function stopScanner() {
+    setShowScanner(false);
+    if (html5QrCodeRef.current) {
+      html5QrCodeRef.current.stop().then(() => {
+        html5QrCodeRef.current.clear();
+      });
     }
   }
 
@@ -141,17 +185,29 @@ export default function Home() {
   
   return (
     <div className="min-h-screen bg-lime-50 flex flex-col items-center justify-start py-6 px-2 font-[family-name:var(--font-geist-sans)]">
+           {/* --- スキャンカメラ --- */}
+      {showScanner && (
+        <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex flex-col items-center justify-center">
+          <div className="bg-white rounded-xl p-4 flex flex-col items-center">
+            <div id="qr-reader" style={{ width: 320, height: 240 }}></div>
+            <button
+              className="mt-4 py-2 px-6 rounded bg-red-500 text-white font-bold"
+              onClick={stopScanner}
+            >
+              キャンセル
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* スキャンボタン */}
       <button
-        className="
-          mb-4 w-full max-w-xs py-3 rounded-xl bg-gradient-to-b from-blue-200 to-blue-400
-          text-xl font-bold text-black shadow-md active:translate-y-1
-        "
+        className="mb-4 w-full max-w-xs py-3 rounded-xl bg-gradient-to-b from-blue-200 to-blue-400 text-xl font-bold text-black shadow-md active:translate-y-1"
         onClick={handleScan}
       >
         スキャン（カメラ）
       </button>
-
+      
       {/* 商品コード欄 */}
       <div className="w-full max-w-xs mb-2">
         <div className="border border-black rounded-lg py-2 px-3 text-lg text-center bg-white min-h-[2.5rem] text-black-900">
