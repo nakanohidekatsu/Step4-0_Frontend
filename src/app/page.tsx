@@ -21,7 +21,7 @@ type CartItem = {
 
 export default function Home() {
   const [showScanner, setShowScanner] = useState(false);
-  const html5QrCodeRef = useRef<any>(null);
+  const html5QrCodeRef = useRef<Html5Qrcode | null>(null);
     // 商品コード（JAN等）
   const [prdCode, setPrdCode] = useState("");
   // 商品ID（一意キー）
@@ -58,17 +58,17 @@ export default function Home() {
       (decodedText: string) => {
         // バーコード（JAN）値取得
         setShowScanner(false);
-        html5QrCodeRef.current.stop().then(() => {
-          html5QrCodeRef.current.clear();
+        html5QrCodeRef.current?.stop().then(() => {
+          html5QrCodeRef.current?.clear();
         });
         setPrdCode(decodedText);
         fetchProductByCODE(decodedText);
       },
-      (error: any) => {
-      // console.log("No QR code", error);
+      (_error: unknown) => {
+        // do nothing
       }
-    ).catch((err: any) => {
-      alert("カメラ起動に失敗しました: " + err);
+    ).catch((err: unknown) => {
+      alert("カメラ起動に失敗しました: " + String(err));
       setShowScanner(false);
     });
   }
@@ -78,7 +78,7 @@ export default function Home() {
     setShowScanner(false);
     if (html5QrCodeRef.current) {
       html5QrCodeRef.current.stop().then(() => {
-        html5QrCodeRef.current.clear();
+        html5QrCodeRef.current?.clear();
       });
     }
   }
