@@ -155,13 +155,13 @@ export default function Home() {
       {/* 商品コード欄 */}
       <div className="w-full max-w-xs mb-2">
         <div className="border border-black rounded-lg py-2 px-3 text-lg text-center bg-white min-h-[2.5rem]">
-          {prdCode || <span className="text-gray-800">商品コード</span>}
+          {prdCode || <span className="text-black-800">商品コード</span>}
         </div>
       </div>
 
       {/* 商品名欄 */}
       <div className="w-full max-w-xs mb-2">
-        <div className="border border-black rounded-lg py-2 px-3 text-lg text-center bg-white min-h-[2.5rem]  text-gray-900">
+        <div className="border border-black rounded-lg py-2 px-3 text-lg text-center bg-white min-h-[2.5rem]  text-black-900">
           {error === "商品がマスタ未登録です"
             ? <span className="text-red-600 font-bold">{error}</span>
             : product
@@ -172,14 +172,14 @@ export default function Home() {
 
       {/* 単価欄 */}
       <div className="w-full max-w-xs mb-2">
-        <div className="border border-black rounded-lg py-2 px-3 text-lg text-center bg-white min-h-[2.5rem]  text-gray-900">
+        <div className="border border-black rounded-lg py-2 px-3 text-lg text-center bg-white min-h-[2.5rem]  text-black-900">
           {product ? `${product.PRICE}円（税抜）` : "単価"}
         </div>
       </div>
 
       {/* 税込欄 */}
       <div className="w-full max-w-xs mb-4">
-        <div className="border border-black rounded-lg py-2 px-3 text-lg text-center bg-white min-h-[2.5rem]  text-gray-900">
+        <div className="border border-black rounded-lg py-2 px-3 text-lg text-center bg-white min-h-[2.5rem]  text-black-900">
           {product ? `${product.PRICE_INC_TAX}円（税込）` : "税込"}
         </div>
       </div>
@@ -222,7 +222,7 @@ export default function Home() {
         <h2 className="text-lg font-bold mb-1 text-center">購入リスト</h2>
         <div className="border border-black rounded-lg p-3 h-[200px] overflow-auto bg-white mb-2">
           {cart.length === 0 ? (
-            <p className="text-gray-800 text-center  text-gray-700">購入リストは空です</p>
+            <p className="text-black-800 text-center  text-black-700">購入リストは空です</p>
           ) : (
             <ul className="text-center">
               {cart.map((item, idx) => (
@@ -255,8 +255,8 @@ export default function Home() {
       {showPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
           <div className="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center">
-            <div className="text-xl font-bold mb-4  text-gray-800">合計金額(税抜)：{totalAmount}円</div>
-            <div className="text-xl font-bold mb-4  text-gray-800">合計金額(税込)：{totalAmount_INC_TAX}円</div>
+            <div className="text-xl font-bold mb-4  text-black-800">合計金額(税抜)：{totalAmount}円</div>
+            <div className="text-xl font-bold mb-4  text-black-800">合計金額(税込)：{totalAmount_INC_TAX}円</div>
             <button
               className="border-2 border-black bg-blue-200 hover:bg-blue-400 px-8 py-2 font-bold rounded-lg"
               onClick={resetAll}
