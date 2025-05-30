@@ -138,16 +138,6 @@ export default function Home() {
     setError("");
     setShowPopup(false);
   }
-
-  const cartListText = cart.map(
-  item => `${item.PRD_NAME} ×1 ${item.PRD_PRICE}円`).join('  ');
-  const listLength = cartListText.length;
-
-  let listFontSizeClass = "text-lg";
-  if (listLength > 20) listFontSizeClass = "text-base";
-  if (listLength > 40) listFontSizeClass = "text-sm";
-  if (listLength > 55) listFontSizeClass = "text-xs";
-
   
   return (
     <div className="min-h-screen bg-lime-50 flex flex-col items-center justify-start py-6 px-2 font-[family-name:var(--font-geist-sans)]">
@@ -234,7 +224,7 @@ export default function Home() {
           {cart.length === 0 ? (
             <p className="text-black-800 text-center text-black-700">購入リストは空です</p>
           ) : (
-            <ul className={`text-center ${listFontSizeClass}`}>
+            <ul className="text-center">
               {cart.map((item, idx) => (
                 <li key={idx}>
                   {item.PRD_NAME} ×1 {item.PRD_PRICE}円
