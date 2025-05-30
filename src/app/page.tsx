@@ -64,8 +64,8 @@ export default function Home() {
         setPrdCode(decodedText);
         fetchProductByCODE(decodedText);
       },
-      (_: unknown) => {
-        // do nothing
+      () => {
+        // 何もしない
       }
     ).catch((err: unknown) => {
       alert("カメラ起動に失敗しました: " + String(err));
