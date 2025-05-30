@@ -234,7 +234,7 @@ export default function Home() {
           {cart.length === 0 ? (
             <p className="text-black-800 text-center text-black-700">購入リストは空です</p>
           ) : (
-            <ul className="text-center">
+            <ul className={`text-center ${listFontSizeClass}`}>
               {cart.map((item, idx) => (
                 <li key={idx}>
                   {item.PRD_NAME} ×1 {item.PRD_PRICE}円
