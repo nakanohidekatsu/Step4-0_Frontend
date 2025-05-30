@@ -144,9 +144,9 @@ export default function Home() {
   const listLength = cartListText.length;
 
   let listFontSizeClass = "text-lg";
-  if (listLength > 45) listFontSizeClass = "text-base";
-  if (listLength > 80) listFontSizeClass = "text-sm";
-  if (listLength > 110) listFontSizeClass = "text-xs";
+  if (listLength > 20) listFontSizeClass = "text-base";
+  if (listLength > 40) listFontSizeClass = "text-sm";
+  if (listLength > 55) listFontSizeClass = "text-xs";
 
   
   return (
