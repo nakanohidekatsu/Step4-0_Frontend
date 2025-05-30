@@ -240,23 +240,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 商品読み込みボタン */}
-      <button
-        className={`
-          mb-2 w-full max-w-xs py-2 rounded-lg border-2 border-black
-          bg-gradient-to-b from-blue-300 to-blue-500
-          hover:from-blue-400 hover:to-blue-400 font-bold
-          shadow-md
-          active:translate-y-1 active:shadow
-          transition-all
-          ${!prdCode || loading ? "opacity-50 pointer-events-none" : ""}
-        `}
-        disabled={!prdCode || loading}
-        onClick={() => fetchProductByCODE(prdCode)}
-      >
-        {loading ? "検索中..." : "商品情報 読み込み"}
-      </button>
-
       {/* 追加ボタン */}
       <button
         className="
@@ -280,7 +263,7 @@ export default function Home() {
           {cart.length === 0 ? (
             <p className="text-black-800 text-center text-black-700">購入リストは空です</p>
           ) : (
-            <ul className="text-center">
+            <ul className="text-center text-xs">
               {cart.map((item, idx) => (
                 <li key={idx}>
                   {item.PRD_NAME} ×1 {item.PRD_PRICE}円
