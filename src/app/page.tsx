@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import { useState } from "react";
 
 type Product = {
@@ -50,9 +50,6 @@ export default function Home() {
         { cache: "no-cache" }
       );
       if (!res.ok) throw new Error("Failed to fetch shouhin");
-
-      // nakano add
-      console.log(process.env.NEXT_PUBLIC_API_ENDPOINT + `/shouhin?CODE=${CODE}`);
 
       const data = await res.json();
       if (!data || !data.NAME) {
