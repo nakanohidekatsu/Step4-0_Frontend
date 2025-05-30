@@ -64,7 +64,7 @@ export default function Home() {
         setPrdCode(decodedText);
         fetchProductByCODE(decodedText);
       },
-      (_error: unknown) => {
+      (_: unknown) => {
         // do nothing
       }
     ).catch((err: unknown) => {
