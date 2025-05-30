@@ -214,7 +214,9 @@ export default function Home() {
           {prdCode || <span className="text-black-800">商品コード</span>}
         </div>
       </div>
-
+      {loading && (
+        <div className="text-center text-blue-600 font-bold mb-2">通信中...</div>
+      )}
       {/* 商品名欄 */}
       <div className="w-full max-w-xs mb-2">
         <div className="border border-black rounded-lg py-2 px-3 text-lg text-center bg-white min-h-[2.5rem] text-black-900">
