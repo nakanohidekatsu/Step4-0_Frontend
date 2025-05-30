@@ -44,6 +44,9 @@ export default function Home() {
     setError("");
     setProduct(null);
 
+    // add nakano
+    console.log("API ENDPOINT:", process.env.NEXT_PUBLIC_API_ENDPOINT);
+
     try {
       const res = await fetch(
         process.env.NEXT_PUBLIC_API_ENDPOINT + `/shouhin?CODE=${CODE}`,
