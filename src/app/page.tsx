@@ -235,13 +235,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 税込欄 */}
-      <div className="w-full max-w-xs mb-4">
-        <div className="border border-black rounded-lg py-2 px-3 text-lg text-center bg-white min-h-[2.5rem]  text-black-900">
-          {product ? `${product.PRICE_INC_TAX}円（税込）` : "税込"}
-        </div>
-      </div>
-
       {/* 追加ボタン */}
       <button
         className="
